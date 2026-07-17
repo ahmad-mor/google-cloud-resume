@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ahmad Almorshed - Cloud Engineer Resume</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      color: #000000;
+      line-height: 1.4;
+      margin: 0;
+      padding: 30px;
+      background-color: #ffffff;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0 0 5px 0;
+      font-size: 26px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .header p {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .objective-text {
+      font-size: 11.5px;
+      text-align: justify;
+      margin: 0 0 10px 0;
+    }
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    ul {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+      font-size: 11.5px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    .languages-section p {
+      font-size: 11.5px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>Ahmad Almorshed</h1>
+    <p>Malqa, Riyadh, Saudi Arabia | 0551342600 | Ahmad3almorshed@gmail.com | linkedin.com/in/ahmad-almorshed</p>
+  </div>
+
+  <div class="section-title">Career Objective</div>
+  <p class="objective-text">
+    Motivated Computer Science graduate and Cloud Engineer with hands-on experience in Google Cloud Platform (GCP) and Alibaba Cloud. Proven ability to design secure cloud infrastructure, manage databases, and implement automated CI/CD workflows. Passionate about cloud networking, automation, and troubleshooting, seeking an entry-level Cloud Support, Operations, or Cloud Engineering role.
+  </p>
+
+  <div class="section-title">Education & Certifications</div>
+  <div class="edu-item">
+    <span>Bachelor of Computer Science – Mustaqbal University</span>
+    <span>Aug 2024</span>
+  </div>
+  <ul>
+    <li><strong>Google Cloud Certified - Associate Cloud Engineer</strong> (Dec 2025)</li>
+    <li><strong>Alibaba Cloud - Cloud Computing & AI Certification</strong> (Nov 2025)</li>
+  </ul>
+
+  <div class="section-title">Technical Skills</div>
+  <ul>
+    <li><strong>Cloud Platforms:</strong> Google Cloud Platform (GCP), Alibaba Cloud</li>
+    <li><strong>GCP Core Services:</strong> Compute Engine, Cloud Storage, Cloud SQL, BigQuery, VPC, Cloud Load Balancing, Cloud NAT</li>
+    <li><strong>DevOps & Tools:</strong> Docker, Cloud Build, Artifact Registry, Git/GitHub, CI/CD Pipelines</li>
+    <li><strong>Networking & OS:</strong> Linux Administration (Debian/Ubuntu), SSH, Firewall Rules, Private IP Networking, Global Load Balancing</li>
+    <li><strong>Programming & Databases:</strong> SQL, Python (Basic), PHP, C#</li>
+  </ul>
+
+  <div class="section-title">Key Cloud Projects</div>
+  <ul>
+    <li><strong>High-Availability Web Architecture (GCP):</strong> Configured a Global HTTP Load Balancer with Autoscaling Managed Instance Groups (MIGs) to distribute traffic across US and Asia regions, ensuring zero downtime during peak periods.</li>
+    <li><strong>Secure Database Integration (GCP):</strong> Deployed a WordPress application connected to Cloud SQL using Private IP to enhance network security, utilizing Cloud NAT for secure outbound system updates.</li>
+    <li><strong>Automated CI/CD Pipeline (DevOps):</strong> Built an automated deployment pipeline using Cloud Build to containerize applications with Docker and push images directly to Artifact Registry.</li>
+    <li><strong>Cloud Billing & Big Data Analysis (GCP):</strong> Processed large infrastructure billing datasets using BigQuery and SQL to extract actionable cost-optimization insights and reports.</li>
+  </ul>
+
+  <div class="section-title">Languages</div>
+  <div class="languages-section">
+    <p><strong>English:</strong> Professional working proficiency | <strong>Arabic:</strong> Native speaker</p>
+  </div>
+
+<div style="text-align: center; margin-top: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 14px;">
+    <p>Visitor Count: <span id="counter" style="font-weight: bold; color: #000000;">Loading...</span></p>
+</div>
+
+<script>
+    const apiURL = "https://visitor-counter-api-1007154092991.me-central1.run.app";
+
+    fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+            if(data.count !== undefined) {
+                document.getElementById("counter").innerText = data.count;
+            } else {
+                document.getElementById("counter").innerText = "Error";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching counter:", error);
+            document.getElementById("counter").innerText = "Unavailable";
+        });
+</script>
+</body>
+</html>
