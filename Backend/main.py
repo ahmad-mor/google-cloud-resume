@@ -1,3 +1,4 @@
+import json
 import functions_framework
 from google.cloud import firestore
 
@@ -6,11 +7,11 @@ db = firestore.Client()
 
 @functions_framework.http
 def hello_http(request):
-    # معالجة طلبات الـ CORS (مهمة جداً عشان المتصفح ما يحجب الاتصال)
+    # معالجة طلبات الـ CORS Preflight (OPTIONS)
     if request.method == 'OPTIONS':
         headers = {
             'Access-Control-Allow-Origin': 'https://almorshed.cloud',
-            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Max-Age': '3600'
         }
@@ -23,23 +24,25 @@ def hello_http(request):
     }
 
     try:
-        # الوصول للمستند اللي أنشأناه في الفايرستور
+        # الوصول للمستند في الفايرستور
         doc_ref = db.collection('voters').document('status')
-        
-        # استخدام الـ Transaction لضمان زيادة العداد بدقة حتى لو دخل كذا شخص بنفس اللحظة
+
+        # ضمان زيادة العداد بدقة عبر Transaction
         @firestore.transactional
         def update_in_transaction(transaction, doc_ref):
             snapshot = doc_ref.get(transaction=transaction)
-            current_count = snapshot.get('count')
+            current_count = snapshot.get('count') if snapshot.exists and 'count' in snapshot.to_dict() else 0
             new_count = current_count + 1
-            transaction.update(doc_ref, {'count': new_count})
+            transaction.set(doc_ref, {'count': new_count}, merge=True)
             return new_count
 
         transaction = db.transaction()
         updated_count = update_in_transaction(transaction, doc_ref)
 
-        # إرسال الرقم الجديد للموقع بصيغة JSON
-        return ({"count": updated_count}, 200, headers)
+        # تحويل النتيجة إلى JSON String وإرجاعها
+        response_body = json.dumps({"count": updated_count})
+        return (response_body, 200, headers)
 
     except Exception as e:
-        return ({"error": str(e)}, 500, headers)
+        error_body = json.dumps({"error": str(e)})
+        return (error_body, 500, headers)

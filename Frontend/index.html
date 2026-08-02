@@ -32,6 +32,13 @@
       font-size: 12px;
       font-weight: 500;
     }
+    .header a {
+      color: #000000;
+      text-decoration: none;
+    }
+    .header a:hover {
+      text-decoration: underline;
+    }
     .section-title {
       font-size: 13px;
       font-weight: bold;
@@ -73,49 +80,54 @@
 <div class="container">
 
   <div class="header">
-    <h1>Ahmad Almorshed</h1>
-    <p>Malqa, Riyadh, Saudi Arabia | 0551342600 | Ahmad3almorshed@gmail.com | linkedin.com/in/ahmad-almorshed</p>
+    <h1>Ahmad Abdullah Almorshed</h1>
+    <p>Riyadh, Saudi Arabia | +966551342600 | ahmad3almorshed@gmail.com | 
+      <a href="https://linkedin.com/in/ahmad-almorshed" target="_blank">linkedin.com/in/ahmad-almorshed</a> | 
+      <a href="https://github.com/ahmad-mor" target="_blank">github.com/ahmad-mor</a>
+    </p>
   </div>
 
-  <div class="section-title">Career Objective</div>
+  <div class="section-title">Professional Summary</div>
   <p class="objective-text">
-    Motivated Computer Science graduate and Cloud Engineer with hands-on experience in Google Cloud Platform (GCP) and Alibaba Cloud. Proven ability to design secure cloud infrastructure, manage databases, and implement automated CI/CD workflows. Passionate about cloud networking, automation, and troubleshooting, seeking an entry-level Cloud Support, Operations, or Cloud Engineering role.
+    Recent Computer Science graduate with hands-on experience in Google Cloud Platform (GCP), cloud infrastructure deployment, networking, virtualization, and cloud security. Certified Google Associate Cloud Engineer with practical experience gained through intensive cloud engineering training and real-world projects involving Compute Engine, Cloud SQL, BigQuery, Docker, CI/CD, and cloud networking. Passionate about cloud computing, automation, and DevOps, seeking to contribute to Cloud Operations, Cloud Support, or Cloud Engineering teams.
   </p>
 
   <div class="section-title">Education & Certifications</div>
   <div class="edu-item">
     <span>Bachelor of Computer Science – Mustaqbal University</span>
-    <span>Aug 2024</span>
+    <span>Graduated: 2024</span>
   </div>
   <ul>
-    <li><strong>Google Cloud Certified - Associate Cloud Engineer</strong> (Dec 2025)</li>
-    <li><strong>Alibaba Cloud - Cloud Computing & AI Certification</strong> (Nov 2025)</li>
+    <li><strong>Google Associate Cloud Engineer</strong> – Google (2026)</li>
+    <li><strong>Google Cloud Engineering Program</strong> – Tuwaiq Academy (2025)</li>
+    <li><strong>Cloud Computing & Artificial Intelligence</strong> – Tuwaiq Academy (2025)</li>
   </ul>
 
-  <div class="section-title">Technical Skills</div>
+  <div class="section-title">Core Skills</div>
   <ul>
-    <li><strong>Cloud Platforms:</strong> Google Cloud Platform (GCP), Alibaba Cloud</li>
-    <li><strong>GCP Core Services:</strong> Compute Engine, Cloud Storage, Cloud SQL, BigQuery, VPC, Cloud Load Balancing, Cloud NAT</li>
-    <li><strong>DevOps & Tools:</strong> Docker, Cloud Build, Artifact Registry, Git/GitHub, CI/CD Pipelines</li>
-    <li><strong>Networking & OS:</strong> Linux Administration (Debian/Ubuntu), SSH, Firewall Rules, Private IP Networking, Global Load Balancing</li>
-    <li><strong>Programming & Databases:</strong> SQL, Python (Basic), PHP, C#</li>
+    <li><strong>Cloud & DevOps:</strong> Google Cloud Platform (GCP), Compute Engine, Cloud Storage, Cloud SQL, BigQuery, Cloud Run, Docker, Cloud Build, Git/GitHub, CI/CD Pipelines, Artifact Registry</li>
+    <li><strong>Networking & Security:</strong> Virtual Private Cloud (VPC), Cloud Load Balancing, Cloud NAT, Identity & Access Management (IAM), Linux Administration, SSH, Firewall Configuration</li>
+    <li><strong>Programming & Databases:</strong> Python, SQL, PHP, C#, MySQL</li>
+    <li><strong>Core Competencies:</strong> Cloud Operations, Infrastructure Deployment, Infrastructure Monitoring, Automation</li>
   </ul>
 
-  <div class="section-title">Key Cloud Projects</div>
+  <div class="section-title">Projects</div>
   <ul>
-    <li><strong>High-Availability Web Architecture (GCP):</strong> Configured a Global HTTP Load Balancer with Autoscaling Managed Instance Groups (MIGs) to distribute traffic across US and Asia regions, ensuring zero downtime during peak periods.</li>
-    <li><strong>Secure Database Integration (GCP):</strong> Deployed a WordPress application connected to Cloud SQL using Private IP to enhance network security, utilizing Cloud NAT for secure outbound system updates.</li>
-    <li><strong>Automated CI/CD Pipeline (DevOps):</strong> Built an automated deployment pipeline using Cloud Build to containerize applications with Docker and push images directly to Artifact Registry.</li>
-    <li><strong>Cloud Billing & Big Data Analysis (GCP):</strong> Processed large infrastructure billing datasets using BigQuery and SQL to extract actionable cost-optimization insights and reports.</li>
+    <li><strong>Full-Stack Cloud Resume Challenge (GCP & Cloud Run):</strong> Deployed a serverless Python API on Google Cloud Run with custom domain integration and public/private access control. Implemented an automated deployment pipeline using GitHub Actions and Cloud Build.</li>
+    <li><strong>High-Availability Web Architecture (GCP):</strong> Designed and deployed a highly available web infrastructure using Managed Instance Groups (MIGs) and Global HTTP Load Balancing across multiple regions to ensure zero downtime.</li>
+    <li><strong>Secure WordPress & Database Deployment (GCP):</strong> Deployed a secure WordPress application connected to Cloud SQL using Private IP, Cloud NAT, and VPC networking to optimize database security and connectivity.</li>
+    <li><strong>Automated CI/CD Pipeline Implementation (DevOps):</strong> Built an automated CI/CD pipeline using Cloud Build, Docker, and Artifact Registry to containerize applications and streamline deployment efficiency.</li>
   </ul>
 
   <div class="section-title">Languages</div>
   <div class="languages-section">
-    <p><strong>English:</strong> Professional working proficiency | <strong>Arabic:</strong> Native speaker</p>
+    <p><strong>Arabic:</strong> Native | <strong>English:</strong> B2 (Upper-Intermediate)</p>
   </div>
 
-<div style="text-align: center; margin-top: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 14px;">
+  <div style="text-align: center; margin-top: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 14px;">
     <p>Visitor Count: <span id="counter" style="font-weight: bold; color: #000000;">Loading...</span></p>
+  </div>
+
 </div>
 
 <script>
@@ -135,5 +147,6 @@
             document.getElementById("counter").innerText = "Unavailable";
         });
 </script>
+
 </body>
 </html>
