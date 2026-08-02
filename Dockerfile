@@ -1,13 +1,16 @@
 FROM nginx:alpine
 
-# تعديل منفذ NGINX إلى 8080 ليتوافق مع Cloud Run
+# 1. تعديل المنفذ لـ 8080 لتوافق Cloud Run
 RUN sed -i 's/listen  *80;/listen 8080;/g' /etc/nginx/conf.d/default.conf
 
-# حذف صفحة NGINX الافتراضية
+# 2. تفريغ المجلد الافتراضي
 RUN rm -rf /usr/share/nginx/html/*
 
-# نسخ ملفات السيرة الذاتية (index.html وباقي الملفات)
-COPY . /usr/share/nginx/html
+# 3. نسخ محتويات مجلد Frontend مباشرة إلى مجلد NGINX الرئيسي
+COPY Frontend/ /usr/share/nginx/html/
+
+# 4. إعطاء صلاحيات القراءة الكاملة
+RUN chmod -R 755 /usr/share/nginx/html
 
 EXPOSE 8080
 
