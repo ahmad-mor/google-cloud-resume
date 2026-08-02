@@ -3,7 +3,7 @@ import functions_framework
 from google.cloud import firestore
 
 # تهيئة الاتصال بقاعدة بيانات Firestore
-db = firestore.Client()
+db = firestore.Client(database='fire123')
 
 @functions_framework.http
 def hello_http(request):
