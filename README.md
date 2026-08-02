@@ -1,26 +1,54 @@
-# Google Cloud Platform (GCP) - Cloud Resume Challenge
+# ☁️ Google Cloud Platform (GCP) - Cloud Resume Challenge
 
-This repository contains the source code for my Cloud Resume Challenge, demonstrating serverless architecture, CI/CD, and infrastructure deployment on Google Cloud Platform.
+This repository contains the full-stack codebase and infrastructure configuration for my **Cloud Resume Challenge** deployed on Google Cloud Platform. The project demonstrates a modern serverless architecture, containerization, automated CI/CD pipelines, and cloud security practices.
 
 ## 🚀 Live Demo
-You can visit the live website here: [https://almorshed.cloud](https://almorshed.cloud)
+🌐 **Website:** [https://almorshed.cloud](https://almorshed.cloud)
+
+---
 
 ## 🛠️ Architecture & Technologies Used
 
-### Frontend
-* **Google Cloud Storage:** Hosts the static website (`index.html`).
-* **JavaScript:** Embedded script to fetch live visitor data from the backend API.
+### 🖥️ Frontend & Containerization
+* **NGINX on Google Cloud Run:** Containerized static website served via NGINXAlpine and hosted on serverless GCP Cloud Run.
+* **HTML5 / CSS3 / JavaScript:** Clean, responsive design fetching live data dynamically from the backend API.
+* **Docker:** Multi-stage image setup configured to listen on port `8080` for Cloud Run compatibility.
 
-### Networking & Security
-* **Global HTTP(S) Load Balancer:** Configured to route external traffic efficiently.
-* **Cloud CDN:** Enabled to cache content globally for faster loading times.
-* **SSL/TLS Certificate:** Secured the custom domain (`almorshed.cloud`) via HTTPS.
+### 🌐 Networking, Custom Domain & Security
+* **Custom Domain Mapping:** Linked `almorshed.cloud` directly to Cloud Run services.
+* **Managed SSL/TLS Certificate:** Automatic HTTPS encryption provisioned via Google Trust Services.
+* **DNS Management:** Managed A-records propagation and routing.
 
-### Database
-* **Google Cloud Firestore:** NoSQL database configured in the `me-central1` (Doha) region to store the live visitor count.
+### ⚙️ Backend API
+* **Cloud Run Functions (Python 3.11):** Serverless HTTP function (`hello_http`) handling visitor requests.
+* **CORS Management:** Configured HTTP Headers and Preflight (`OPTIONS`) handling to allow secure cross-origin requests.
+* **Transactional Concurrency:** Implemented `@firestore.transactional` logic to accurately increment visitor counters under concurrent loads.
 
-### Backend API
-* **Cloud Run Functions:** Serverless API written in **Python 3.12** to handle data increments.
-* **CORS Security:** Handled Cross-Origin Resource Sharing to restrict API access strictly to the resume domain.
-* **Cloud Firestore Transactions:** Implemented transactional database updates to handle concurrent visitor spikes without data corruption.
-* **Identity and Access Management (IAM):** Configured appropriate service account permissions using the `Cloud Datastore User` role for secure database access.
+### 🗄️ Database
+* **Google Cloud Firestore:** Scalable NoSQL database (`fire123` instance) storing live visitor stats in a `voters/status` collection.
+
+### 🔄 DevOps & CI/CD Pipeline
+* **GitHub Actions:** Automated deployment pipeline triggering build and deployment workflows on every `git push` to the `main` branch.
+* **Artifact Registry / Container Registry:** Storing and managing Docker container images.
+
+---
+
+## 📁 Repository Structure
+
+```text
+.
+├── Frontend/
+│   └── index.html          # Resume frontend markup & JS fetch counter script
+├── Dockerfile              # NGINX build instructions & port 8080 configuration
+├── main.py                 # Python backend function interacting with Firestore
+├── requirements.txt        # Backend dependencies (functions-framework, google-cloud-firestore)
+└── README.md               # Project documentation
+
+👨‍💻 Author
+Ahmad Abdullah Almorshed
+
+Associate Cloud Engineer (Google Cloud Certified)
+
+GitHub: @ahmad-mor
+
+LinkedIn: linkedin.com/in/ahmad-almorshed
