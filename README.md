@@ -31,6 +31,14 @@ This repository contains the full-stack codebase and infrastructure configuratio
 * **GitHub Actions:** Automated deployment pipeline triggering build and deployment workflows on every `git push` to the `main` branch.
 * **Artifact Registry / Container Registry:** Storing and managing Docker container images.
 
+### 🏗️ Infrastructure as Code (IaC)
+* **Terraform:** Managed full infrastructure lifecycle using Declarative IaC.
+* **Resources Managed:**
+  * `google_cloud_run_v2_service` (Frontend NGINX & Backend Python API)
+  * `google_firestore_database` & `google_firestore_document` (Database & Schema)
+  * `google_cloud_run_domain_mapping` (SSL Certificates & Domain Routing)
+  * `google_cloud_run_v2_service_iam_member` (Public Invoker IAM Roles)
+
 ---
 
 ## 📁 Repository Structure

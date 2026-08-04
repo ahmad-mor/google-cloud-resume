@@ -1,0 +1,9 @@
+# Terraform Secrets & State
+terraform/credentials.json
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform/
+
+# OS / IDE files
+.DS_Store
+.vscode/
