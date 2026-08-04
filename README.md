@@ -51,7 +51,7 @@ This repository contains the full-stack codebase and infrastructure configuratio
 ├── main.py                 # Python backend function interacting with Firestore
 ├── requirements.txt        # Backend dependencies (functions-framework, google-cloud-firestore)
 └── README.md               # Project documentation
-
+```
 👨‍💻 Author
 Ahmad Abdullah Almorshed
 
