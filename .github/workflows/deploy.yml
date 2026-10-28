@@ -21,7 +21,18 @@ jobs:
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
 
-    - name: Build and Deploy to Cloud Run
+    - name: Deploy Backend API (Python function) to Cloud Run
+      run: |
+        gcloud run deploy visitor-counter-api \
+          --source Backend \
+          --function hello_http \
+          --base-image python312 \
+          --region europe-west1 \
+          --project cloud-resume-project-504113 \
+          --allow-unauthenticated \
+          --quiet
+
+    - name: Build and Deploy Frontend to Cloud Run
       run: |
         gcloud run deploy cloud-resume \
           --source . \

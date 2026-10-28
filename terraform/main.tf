@@ -60,6 +60,11 @@ resource "google_cloud_run_v2_service" "backend_api" {
     }
   }
 
+  # الكود الحقيقي يُنشر من GitHub Actions، فلا تجعل Terraform يرجّع الصورة المؤقتة
+  lifecycle {
+    ignore_changes = [template, client, client_version]
+  }
+
   depends_on = [google_project_service.services]
 }
 
