@@ -133,8 +133,19 @@
 <script>
     const apiURL = "https://visitor-counter-api-800123700387.europe-west1.run.app";
 
-    fetch(apiURL)
-        .then(response => response.json())
+    // زيارة جديدة (أول مرة في هذه الجلسة) = POST يزيد العداد
+    // تحديث الصفحة في نفس الجلسة = GET يقرأ العدد فقط
+    let alreadyCounted = false;
+    try { alreadyCounted = sessionStorage.getItem("visitCounted") === "1"; } catch (e) {}
+
+    fetch(apiURL, { method: alreadyCounted ? "GET" : "POST" })
+        .then(response => {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            if (!alreadyCounted) {
+                try { sessionStorage.setItem("visitCounted", "1"); } catch (e) {}
+            }
+            return response.json();
+        })
         .then(data => {
             if(data.count !== undefined) {
                 document.getElementById("counter").innerText = data.count;

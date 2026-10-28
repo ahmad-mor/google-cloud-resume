@@ -1,48 +1,49 @@
-import json
+import logging
 import functions_framework
 from google.cloud import firestore
 from flask import jsonify
 
-# الاتصال بقاعدة البيانات المحددة عندك fire123
 db = firestore.Client(database='fire123')
+doc_ref = db.collection('voters').document('status')
+
+CORS_HEADERS = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Max-Age': '3600',
+}
+
+
+@firestore.transactional
+def increment(transaction, ref):
+    snapshot = ref.get(transaction=transaction)
+    current = (snapshot.to_dict() or {}).get('count', 0) if snapshot.exists else 0
+    new_count = current + 1
+    transaction.set(ref, {'count': new_count}, merge=True)
+    return new_count
+
 
 @functions_framework.http
 def hello_http(request):
-    # معالجة الـ CORS بشكل كامل لجميع الطلبات وطلبات OPTIONS تلقائياً
     if request.method == 'OPTIONS':
-        headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-            'Access-Control-Max-Age': '3600'
-        }
-        return ('', 204, headers)
+        return ('', 204, CORS_HEADERS)
 
-    headers = {
-        'Access-Control-Allow-Origin': '*'
-    }
+    headers = {'Access-Control-Allow-Origin': '*'}
 
     try:
-        doc_ref = db.collection('voters').document('status')
+        # GET: قراءة العدد الحالي فقط بدون زيادة
+        if request.method == 'GET':
+            snapshot = doc_ref.get()
+            count = (snapshot.to_dict() or {}).get('count', 0) if snapshot.exists else 0
+            return (jsonify({"count": count}), 200, headers)
 
-        @firestore.transactional
-        def update_in_transaction(transaction, doc_ref):
-            snapshot = doc_ref.get(transaction=transaction)
-            current_count = 0
-            if snapshot.exists:
-                data = snapshot.to_dict()
-                if data and 'count' in data:
-                    current_count = data['count']
-            
-            new_count = current_count + 1
-            transaction.set(doc_ref, {'count': new_count}, merge=True)
-            return new_count
+        # POST: زيادة العداد
+        if request.method == 'POST':
+            new_count = increment(db.transaction(), doc_ref)
+            return (jsonify({"count": new_count}), 200, headers)
 
-        transaction = db.transaction()
-        updated_count = update_in_transaction(transaction, doc_ref)
+        return (jsonify({"error": "Method not allowed"}), 405, headers)
 
-        return (jsonify({"count": updated_count}), 200, headers)
-
-    except Exception as e:
-        # إرجاع تفاصيل الخطأ بصيغة JSON بدلاً من انهيار الخادم
-        return (jsonify({"error": str(e)}), 200, headers)
+    except Exception:
+        logging.exception("Counter update failed")
+        return (jsonify({"error": "Internal server error"}), 500, headers)
