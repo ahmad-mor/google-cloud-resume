@@ -25,7 +25,7 @@ def next_count(current):
 
 @firestore.transactional
 def increment(transaction, ref):
-       snapshot = ref.get(transaction=transaction)
+    snapshot = ref.get(transaction=transaction)
     new_count = next_count(read_count(snapshot))
     transaction.set(ref, {'count': new_count}, merge=True)
     return new_count
@@ -40,7 +40,7 @@ def hello_http(request):
 
     try:
         # GET: قراءة العدد الحالي فقط بدون زيادة
-                if request.method == 'GET':
+        if request.method == 'GET':
             count = read_count(doc_ref.get())
             return (jsonify({"count": count}), 200, headers)
 
