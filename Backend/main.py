@@ -20,7 +20,7 @@ def read_count(snapshot):
 
 
 def next_count(current):
-    return current + 1
+    return current - 1
 
 
 @firestore.transactional
