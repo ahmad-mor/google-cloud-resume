@@ -11,14 +11,22 @@ CORS_HEADERS = {
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Max-Age': '3600',
+}
 
+def read_count(snapshot):
+    if not snapshot.exists:
+        return 0
+    return (snapshot.to_dict() or {}).get('count', 0)
+
+
+def next_count(current):
+    return current + 1
 
 
 @firestore.transactional
 def increment(transaction, ref):
-    snapshot = ref.get(transaction=transaction)
-    current = (snapshot.to_dict() or {}).get('count', 0) if snapshot.exists else 0
-    new_count = current + 1
+       snapshot = ref.get(transaction=transaction)
+    new_count = next_count(read_count(snapshot))
     transaction.set(ref, {'count': new_count}, merge=True)
     return new_count
 
@@ -32,9 +40,8 @@ def hello_http(request):
 
     try:
         # GET: قراءة العدد الحالي فقط بدون زيادة
-        if request.method == 'GET':
-            snapshot = doc_ref.get()
-            count = (snapshot.to_dict() or {}).get('count', 0) if snapshot.exists else 0
+                if request.method == 'GET':
+            count = read_count(doc_ref.get())
             return (jsonify({"count": count}), 200, headers)
 
         # POST: زيادة العداد
