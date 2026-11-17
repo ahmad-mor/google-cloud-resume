@@ -75,6 +75,7 @@ jobs:
       run: |
         gcloud run deploy cloud-resume \
           --image $IMAGE \
+          --labels commit-sha=${{ github.sha }} \
           --region europe-west1 \
           --project cloud-resume-project-504113 \
           --allow-unauthenticated \
