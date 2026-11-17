@@ -35,6 +35,8 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    env:
+      IMAGE: europe-west1-docker.pkg.dev/cloud-resume-project-504113/cloud-resume/frontend:${{ github.sha }}
 
     steps:
     - name: Checkout repository
@@ -60,10 +62,19 @@ jobs:
           --allow-unauthenticated \
           --quiet
 
-    - name: Build and Deploy Frontend to Cloud Run
+    - name: Configure Docker for Artifact Registry
+      run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+
+    - name: Build frontend image
+      run: docker build -t $IMAGE .
+
+    - name: Push frontend image
+      run: docker push $IMAGE
+
+    - name: Deploy frontend to Cloud Run
       run: |
         gcloud run deploy cloud-resume \
-          --source . \
+          --image $IMAGE \
           --region europe-west1 \
           --project cloud-resume-project-504113 \
           --allow-unauthenticated \
