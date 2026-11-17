@@ -2,133 +2,378 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ahmad Almorshed - Cloud Engineer Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ahmad Almorshed | Cloud & DevOps Engineer</title>
+  <meta name="description" content="Ahmad Almorshed, Cloud and DevOps Engineer. Google Cloud Certified Associate Cloud Engineer working with GCP, AWS, Terraform and CI/CD.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --paper: #FBFCFD;
+      --ink: #14213D;
+      --body: #3B4558;
+      --muted: #6B7689;
+      --rule: #DCE2EA;
+      --accent: #1F5FAD;
+      --live: #0E7A5F;
+      --live-bg: #EAF5F1;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
     body {
-      font-family: 'Arial', sans-serif;
-      color: #000000;
-      line-height: 1.4;
       margin: 0;
-      padding: 30px;
-      background-color: #ffffff;
+      background: var(--paper);
+      color: var(--body);
+      font-family: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
     }
-    .container {
-      max-width: 800px;
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    a:hover { border-bottom-color: currentColor; }
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .page {
+      max-width: 860px;
       margin: 0 auto;
+      padding: 64px 24px 48px;
     }
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
+
+    /* Header */
+    .masthead {
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--ink);
     }
-    .header h1 {
-      margin: 0 0 5px 0;
-      font-size: 26px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .header p {
+    .masthead h1 {
       margin: 0;
-      font-size: 12px;
+      color: var(--ink);
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .role {
+      margin: 10px 0 0;
+      color: var(--ink);
+      font-size: 1.125rem;
       font-weight: 500;
     }
-    .header a {
-      color: #000000;
-      text-decoration: none;
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.9375rem;
     }
-    .header a:hover {
-      text-decoration: underline;
+    .contact li { color: var(--muted); }
+
+    /* Sections: label column on the left, content on the right */
+    .block {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 0 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--rule);
     }
-    .section-title {
-      font-size: 13px;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-bottom: 1.5px solid #000000;
-      padding-bottom: 3px;
-      margin-top: 20px;
-      margin-bottom: 8px;
-      letter-spacing: 0.5px;
+    .block:last-of-type { border-bottom: 0; }
+    .block > h2 {
+      margin: 2px 0 0;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 600;
     }
-    .objective-text {
-      font-size: 11.5px;
-      text-align: justify;
-      margin: 0 0 10px 0;
+    .block > div > :first-child { margin-top: 0; }
+
+    .summary {
+      margin: 0;
+      max-width: 62ch;
     }
-    .edu-item {
+
+    /* Skills */
+    .skills {
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .skills dt {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .skills dd {
+      margin: 2px 0 0;
+      max-width: 62ch;
+    }
+
+    /* Projects */
+    .project + .project { margin-top: 28px; }
+    .project h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .repo {
+      display: inline-block;
+      margin-top: 2px;
+      font-size: 0.875rem;
+    }
+    .project ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      max-width: 62ch;
+    }
+    .project li + li { margin-top: 6px; }
+    .project li::marker { color: var(--muted); }
+
+    /* The one live element: this site's own project entry */
+    .project.is-live {
+      margin-left: -20px;
+      padding: 18px 20px 20px;
+      border-left: 3px solid var(--live);
+      background: var(--live-bg);
+      border-radius: 0 6px 6px 0;
+    }
+    .live-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 16px;
+      margin-top: 4px;
+      font-size: 0.875rem;
+    }
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--live);
+      font-weight: 500;
+    }
+    .live-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--live);
+    }
+    #counter {
+      color: var(--ink);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Simple rows: education, certifications */
+    .rows {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .rows li {
       display: flex;
       justify-content: space-between;
-      font-size: 11.5px;
-      font-weight: bold;
-      margin-bottom: 4px;
+      gap: 16px;
     }
-    ul {
-      margin: 0 0 10px 0;
-      padding-left: 20px;
-      font-size: 11.5px;
+    .rows li + li { margin-top: 8px; }
+    .rows .what { color: var(--ink); font-weight: 500; }
+    .rows .where { display: block; color: var(--body); font-weight: 400; }
+    .rows .when {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
     }
-    li {
-      margin-bottom: 4px;
+
+    .colophon {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.8125rem;
     }
-    .languages-section p {
-      font-size: 11.5px;
-      margin: 0;
+
+    @media (max-width: 680px) {
+      .page { padding: 40px 16px 32px; }
+      .block {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 26px 0;
+      }
+      .project.is-live { margin-left: -16px; margin-right: -16px; padding: 16px; border-radius: 0; }
+    }
+
+    @media print {
+      body { background: #fff; color: #000; font-size: 11pt; }
+      .page { padding: 0; max-width: none; }
+      a { color: #000; }
+      .project.is-live { background: none; margin-left: 0; padding: 0; border-left: 0; }
+      .live-line, .colophon { display: none; }
+      .block { padding: 14px 0; break-inside: avoid; }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+<main class="page">
 
-  <div class="header">
+  <header class="masthead">
     <h1>Ahmad Abdullah Almorshed</h1>
-    <p>Riyadh, Saudi Arabia | +966551342600 | ahmad3almorshed@gmail.com | 
-      <a href="https://linkedin.com/in/ahmad-almorshed" target="_blank">linkedin.com/in/ahmad-almorshed</a> | 
-      <a href="https://github.com/ahmad-mor" target="_blank">github.com/ahmad-mor</a>
-    </p>
-  </div>
+    <p class="role">Cloud &amp; DevOps Engineer, Google Cloud Certified, GCP and AWS</p>
+    <ul class="contact">
+      <li>Riyadh, Saudi Arabia</li>
+      <li><a href="tel:+966551342600">+966 55 134 2600</a></li>
+      <li><a href="mailto:ahmad3almorshed@gmail.com">ahmad3almorshed@gmail.com</a></li>
+      <li><a href="https://linkedin.com/in/ahmad-almorshed" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/ahmad-mor" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </header>
 
-  <div class="section-title">Professional Summary</div>
-  <p class="objective-text">
-    Recent Computer Science graduate with hands-on experience in Google Cloud Platform (GCP), cloud infrastructure deployment, networking, virtualization, and cloud security. Certified Google Associate Cloud Engineer with practical experience gained through intensive cloud engineering training and real-world projects involving Compute Engine, Cloud SQL, BigQuery, Docker, CI/CD, and cloud networking. Passionate about cloud computing, automation, and DevOps, seeking to contribute to Cloud Operations, Cloud Support, or Cloud Engineering teams.
-  </p>
+  <section class="block">
+    <h2>Summary</h2>
+    <div>
+      <p class="summary">
+        Computer Science graduate and Google Cloud Certified Associate Cloud Engineer with hands-on experience building,
+        securing and automating cloud infrastructure on Google Cloud and AWS. Built and documented four public projects
+        on GitHub covering network design, infrastructure as code with Terraform, CI/CD, containers, serverless and
+        event-driven systems. Comfortable with Linux, troubleshooting and writing clear technical documentation.
+        Seeking an entry-level DevOps or Cloud Engineer role.
+      </p>
+    </div>
+  </section>
 
-  <div class="section-title">Education & Certifications</div>
-  <div class="edu-item">
-    <span>Bachelor of Computer Science – Mustaqbal University</span>
-    <span>Graduated: 2024</span>
-  </div>
-  <ul>
-    <li><strong>Google Associate Cloud Engineer</strong> – Google (2026)</li>
-    <li><strong>Google Cloud Engineering Program</strong> – Tuwaiq Academy (2025)</li>
-    <li><strong>Cloud Computing & Artificial Intelligence</strong> – Tuwaiq Academy (2025)</li>
-  </ul>
+  <section class="block">
+    <h2>Projects</h2>
+    <div>
 
-  <div class="section-title">Core Skills</div>
-  <ul>
-    <li><strong>Cloud & DevOps:</strong> Google Cloud Platform (GCP), Compute Engine, Cloud Storage, Cloud SQL, BigQuery, Cloud Run, Docker, Cloud Build, Git/GitHub, CI/CD Pipelines, Artifact Registry</li>
-    <li><strong>Networking & Security:</strong> Virtual Private Cloud (VPC), Cloud Load Balancing, Cloud NAT, Identity & Access Management (IAM), Linux Administration, SSH, Firewall Configuration</li>
-    <li><strong>Programming & Databases:</strong> Python, SQL, PHP, C#, MySQL</li>
-    <li><strong>Core Competencies:</strong> Cloud Operations, Infrastructure Deployment, Infrastructure Monitoring, Automation</li>
-  </ul>
+      <article class="project is-live">
+        <h3>Cloud Resume Challenge: serverless website on GCP</h3>
+        <div class="live-line">
+          <span class="live-status">You're on it now</span>
+          <span>Visitors: <span id="counter">Loading...</span></span>
+          <a href="https://github.com/ahmad-mor/google-cloud-resume" target="_blank" rel="noopener">github.com/ahmad-mor/google-cloud-resume</a>
+        </div>
+        <ul>
+          <li>Containerized NGINX frontend and a Python API on Cloud Run, with a Firestore visitor counter that uses transactions to stay accurate under concurrent visits.</li>
+          <li>All infrastructure provisioned with Terraform: Cloud Run services, Firestore, IAM and domain mapping, with a custom domain and Google-managed SSL.</li>
+          <li>GitHub Actions pipeline: every pull request runs ruff and pytest (Firestore mocked), branch protection blocks failing merges, and deploys authenticate through Workload Identity Federation with no stored keys.</li>
+          <li>Each release is a Docker image tagged with its commit SHA in Artifact Registry, so the running version is always traceable to a commit.</li>
+        </ul>
+      </article>
 
-  <div class="section-title">Projects</div>
-  <ul>
-    <li><strong>Full-Stack Cloud Resume Challenge (GCP & Cloud Run):</strong> Deployed a serverless Python API on Google Cloud Run with custom domain integration and public/private access control. Implemented an automated deployment pipeline using GitHub Actions and Cloud Build.</li>
-    <li><strong>High-Availability Web Architecture (GCP):</strong> Designed and deployed a highly available web infrastructure using Managed Instance Groups (MIGs) and Global HTTP Load Balancing across multiple regions to ensure zero downtime.</li>
-    <li><strong>Secure WordPress & Database Deployment (GCP):</strong> Deployed a secure WordPress application connected to Cloud SQL using Private IP, Cloud NAT, and VPC networking to optimize database security and connectivity.</li>
-    <li><strong>Automated CI/CD Pipeline Implementation (DevOps):</strong> Built an automated CI/CD pipeline using Cloud Build, Docker, and Artifact Registry to containerize applications and streamline deployment efficiency.</li>
-  </ul>
+      <article class="project">
+        <h3>Secure multi-tier VPC on AWS</h3>
+        <a class="repo" href="https://github.com/ahmad-mor/aws-secure-multitier-vpc" target="_blank" rel="noopener">github.com/ahmad-mor/aws-secure-multitier-vpc</a>
+        <ul>
+          <li>Three-tier VPC across three Availability Zones: Application Load Balancer in public subnets, NGINX app server and database server in private subnets with no public IPs, outbound access through a NAT Gateway.</li>
+          <li>Least-privilege traffic through security-group chaining (Internet to ALB:80, ALB to App:80, App to DB:3306), with SSH replaced by SSM Session Manager and port 22 kept closed.</li>
+          <li>Verified with connectivity tests and VPC Flow Logs in CloudWatch Logs Insights; diagnosed and fixed a 502 error caused by a missing NAT route.</li>
+        </ul>
+      </article>
 
-  <div class="section-title">Languages</div>
-  <div class="languages-section">
-    <p><strong>Arabic:</strong> Native | <strong>English:</strong> B2 (Upper-Intermediate)</p>
-  </div>
+      <article class="project">
+        <h3>Event-driven image processing pipeline on GCP</h3>
+        <a class="repo" href="https://github.com/ahmad-mor/gcp-event-driven-app" target="_blank" rel="noopener">github.com/ahmad-mor/gcp-event-driven-app</a>
+        <ul>
+          <li>Uploads to Cloud Storage publish events to Pub/Sub, triggering a Python Cloud Run Function that creates thumbnails with Pillow and saves them to a separate bucket.</li>
+          <li>Cut image size by up to 76% in testing; the fully serverless design scales to zero, with no compute cost when idle.</li>
+        </ul>
+      </article>
 
-  <div style="text-align: center; margin-top: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 14px;">
-    <p>Visitor Count: <span id="counter" style="font-weight: bold; color: #000000;">Loading...</span></p>
-  </div>
+      <article class="project">
+        <h3>Automated CI/CD pipeline for a containerized web app on GCP</h3>
+        <a class="repo" href="https://github.com/ahmad-mor/gcp-automated-app" target="_blank" rel="noopener">github.com/ahmad-mor/gcp-automated-app</a>
+        <ul>
+          <li>Containerized a Flask application (Gunicorn) with Docker and wrote a Cloud Build pipeline that builds the image, pushes it to Artifact Registry and deploys it to Cloud Run (me-central1) on every push to main.</li>
+        </ul>
+      </article>
 
-</div>
+      <article class="project">
+        <h3>Hands-on labs: Google Cloud Engineering Bootcamp, Tuwaiq Academy</h3>
+        <ul>
+          <li>High availability: Managed Instance Groups behind a global HTTP load balancer across multiple regions.</li>
+          <li>Secure WordPress: connected to Cloud SQL over private IP, with Cloud NAT and custom VPC networking.</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Skills</h2>
+    <div>
+      <dl class="skills">
+        <div>
+          <dt>Google Cloud</dt>
+          <dd>Compute Engine, Cloud Run, Cloud Run Functions, Cloud Storage, Cloud SQL, Firestore, Pub/Sub, BigQuery, Cloud Build, Artifact Registry, IAM</dd>
+        </div>
+        <div>
+          <dt>AWS</dt>
+          <dd>VPC, EC2, Application Load Balancer, NAT Gateway, Security Groups, IAM, Systems Manager (Session Manager), CloudWatch</dd>
+        </div>
+        <div>
+          <dt>DevOps and IaC</dt>
+          <dd>Terraform, Docker, Kubernetes (Minikube and kubectl), GitHub Actions, Cloud Build, Git and GitHub, CI/CD pipelines</dd>
+        </div>
+        <div>
+          <dt>Networking and security</dt>
+          <dd>VPC and subnet design, routing, NAT, load balancing, firewall and security-group rules, least-privilege IAM, private networking, DNS, SSL/TLS</dd>
+        </div>
+        <div>
+          <dt>Systems and programming</dt>
+          <dd>Linux administration, troubleshooting and root-cause analysis, NGINX, SSH, Python (Flask), SQL, MySQL, PHP, C#</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Education</h2>
+    <div>
+      <ul class="rows">
+        <li>
+          <span class="what">Bachelor of Computer Science<span class="where">Mustaqbal University</span></span>
+          <span class="when">2024</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Certifications</h2>
+    <div>
+      <ul class="rows">
+        <li>
+          <span class="what">Google Cloud Certified: Associate Cloud Engineer</span>
+          <span class="when">2026</span>
+        </li>
+        <li>
+          <span class="what">Google Cloud Engineering Bootcamp<span class="where">Tuwaiq Academy</span></span>
+          <span class="when">2025</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Languages</h2>
+    <div>
+      <p class="summary">Arabic, native. English, B2 (upper-intermediate).</p>
+    </div>
+  </section>
+
+  <p class="colophon">Served from Cloud Run, deployed by GitHub Actions on every merge to main.</p>
+
+</main>
 
 <script>
     const apiURL = "https://visitor-counter-api-800123700387.europe-west1.run.app";
